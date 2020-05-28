@@ -1,0 +1,5 @@
+* OldTools.jl
+
+A simple module with useful functions or shorthands that do not exist in base julia, that I use all the time and would require loading unnecessarily big modules (with lots of precompliation time!).
+
+None of these codes are suppposed to be versatile and generic, they just work for common input types (arrays of Float64 mostly).
