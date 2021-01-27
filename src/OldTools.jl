@@ -1,6 +1,6 @@
 module OldTools
 
-using NumericalIntegration: integrate, cumul_integrate
+using NumericalIntegration: Trapezoidal, integrate, cumul_integrate
 
 export linspace, logspace, linfit, trapz, cumtrapz, lininterp, cubicinterp, cleancurve, cleancurvei, frequenciesdft, movingaverage, pow10latexstring
 

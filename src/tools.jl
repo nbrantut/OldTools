@@ -106,6 +106,8 @@ end
 
 """
 	peaks(n)
+
+Return arrays x, y, and z of size, n, n, and n-by-n, respectively, where (x,y) is a regular grid and z is a nicely peaked function. Similar to Matlab's peaks function.
 """
 function peaks(n=50)
     x = collect(range(-3,stop=3,length=n))
