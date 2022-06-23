@@ -48,45 +48,57 @@ Compute cumulative numerical integral of y(x) with trapezoidal rule.
 cumtrapz(x,y) = cumul_integrate(x,y,Trapezoidal())
 
 """
-	cleancurve(x0,y0,step)
+    subsample(y, step)
 
-Generate a pair of vectors (x,y) such that the values of y are separated by the given step.
+Return array of indices `I` such that elements of `y[I]` are separated by at least `step`.
 """
-function cleancurve(x0,y0,step)
-    x=eltype(x0)[]
-    y=eltype(y0)[]
-
-    push!(x, x0[1])
-    push!(y, y0[1])
-
-    for k in eachindex(y0)        
-        if isfinite(y0[k]) && abs(y0[k]-y[end])>=step
-            push!(x, x0[k])
-            push!(y, y0[k])
+function subsample(y, step)
+    I = Int[]
+    y0 = y[1]
+    push!(I, 1)
+    for k in eachindex(y)
+        if abs(y[k]-y0)>=step
+            push!(I,k)
+            y0=y[k]
         end
     end
-    return (x,y)
+    return I
 end
 
 """
-	cleancurvei(x0,y0,step)
+    subsample_grow(y, step)
 
-Generate a pair of vectors (x,y) such that the values of y are separated by the given step. Forces the sequence of y's to be monotonically increasing.
+Return array of indices `I` such that elements of `y[I]` are monotonically increasing with increments of at least `step`.
 """
-function cleancurvei(x0,y0,step)
-    x=eltype(x0)[]
-    y=eltype(y0)[]
-
-    push!(x, x0[1])
-    push!(y, y0[1])
-
-    for k in eachindex(y0)        
-        if isfinite(y0[k]) && (y0[k]-y[end])>=step
-            push!(x, x0[k])
-            push!(y, y0[k])
+function subsample_grow(y, step)
+    I = Int[]
+    y0 = y[1]
+    push!(I, 1)
+    for k in eachindex(y)
+        if (y[k]-y0)>=step
+            push!(I,k)
+            y0=y[k]
         end
     end
-    return (x,y)
+    return I
+end
+
+"""
+    subsample_decr(y, step)
+
+Return array of indices `I` such that elements of `y[I]` are monotonically decreasing with increments of at least `step`.
+"""
+function subsample_decr(y, step)
+    I = Int[]
+    y0 = y[1]
+    push!(I, 1)
+    for k in eachindex(y)
+        if (y[k]-y0)<=step
+            push!(I,k)
+            y0=y[k]
+        end
+    end
+    return I
 end
 
 """
