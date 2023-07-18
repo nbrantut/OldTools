@@ -20,17 +20,21 @@ end
 """
 	movingaverage(X, N)
 
-Compute moving average for vector X with N points. This is taken from https://stackoverflow.com/questions/59562325/moving-average-in-julia
+Compute moving average for vector X with N points. This is modified from https://stackoverflow.com/questions/59562325/moving-average-in-julia
 """
 function movingaverage(X::Vector, N::Int)
     backwin = div(N,2) 
     fwdwin = isodd(N) ? div(N,2) : div(N,2) - 1
     Nx = length(X)
     Y = similar(X)
-    for n in eachindex(X)
+    @inbounds for n in eachindex(X)
         i0 = max(1,n - backwin)
         i1 = min(Nx,n + fwdwin)
-        Y[n] = sum(X[i0:i1])/(i1-i0+1)
+        Y[n] = zero(eltype(Y))
+        for i in i0:i1
+            Y[n] += X[i]
+        end
+        Y[n] /= (i1-i0+1)
     end
     return Y
 end
