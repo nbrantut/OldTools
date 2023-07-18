@@ -1,7 +1,7 @@
 name = "OldTools"
 uuid = "b9d4be7b-a38a-4bc7-9cea-87fd3e1457f1"
 authors = ["Nicolas Brantut <nicolas.brantut@normalesup.org>"]
-version = "0.2.0"
+version = "0.3.0"
 
 [deps]
 NumericalIntegration = "e7bfaba1-d571-5449-8927-abc22e82249b"
