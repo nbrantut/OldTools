@@ -2,7 +2,7 @@ module OldTools
 
 using NumericalIntegration: Trapezoidal, integrate, cumul_integrate
 
-export linspace, logspace, linfit, trapz, cumtrapz, lininterp, cubicinterp, cleancurve, cleancurvei, frequenciesdft, movingaverage, pow10latexstring, peaks
+export linspace, logspace, linfit, trapz, cumtrapz, lininterp, cubicinterp, subsample, subsample_grow, subsample_decr, frequenciesdft, movingaverage, pow10latexstring, peaks
 
 include("tools.jl")
 include("interp.jl")
