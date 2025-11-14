@@ -31,10 +31,10 @@ function movingaverage(X,N)
     
     # first points
     for n in 1:backwin+1
-        for i in 1:n+fwdwin
+        for i in 1:min(2n-1, N)
             Y[n] += X[i]
         end
-        Y[n] /= (n+fwdwin)
+        Y[n] /= min(2n-1,N)
     end
     
     @inbounds for n in backwin+2:Nx-fwdwin
@@ -46,10 +46,10 @@ function movingaverage(X,N)
 
     # last points
     for n in Nx-fwdwin+1:Nx
-        for i in n-backwin:Nx
+        for i in 2n-Nx:Nx
             Y[n] += X[i]
         end
-        Y[n] /= (Nx-n+backwin+1)
+        Y[n] /= (2Nx-2n+1)
     end
     
     return Y
